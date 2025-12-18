@@ -1,0 +1,14 @@
+#Limpa o Prompt
+cls 
+
+#Teste de rede
+ping
+
+#Rastrear rotas
+tracert
+
+#Consultar servidores
+nslookup
+
+#Informaçoes detalhadas de conexao da maquina
+ipconfig /all

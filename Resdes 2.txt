@@ -1,0 +1,80 @@
+Redes locais virtuais
+
+VLANs - Virtual local area network
+
+TTL - Time to Leave (Quantos dispositivos de rede foi passado)
+
+__EXIBIR__
+show vlan brief - ver as vlans conectadas
+show interface trunk - ver conectividades
+Show spanning vlan (10) - apresenta o root da lan 
+show ip dhcp pool - Para mostrar as configurações do DHCP
+__FimExibir__
+
+
+---
+Atribuir uma Vlan
+CLI-
+#enable - abrir configuração
+#configure terminal
+#vlan (numero da la escolhido [10])
+name (nome escolhido[pesquisa])
+exit
+
+---
+Configurar a Vlan
+# Configure terminal
+#interface Fa 0/1 (qual porta se refere)
+#switchport mode access (entrar na configuraçãopara mudar o modo de acesso)
+#switchport exit vlan (10)
+#exit
+---
+
+Swtch conectar 
+#interface Fa (0/3)
+#switchport mode trunk (interface tramsita os dados das vlans
+#exit
+------
+
+Configurando roteador
+#enable
+#configure
+#interface Fa ()- indentificar a porta
+#no shutdown - informar a porta (Não desligar a porta)
+#exit
+~~ Gerar um DHCP para conectar a lan ~~
+#ip dhcp pool (vlan)
+#network (ip - mascara)
+#exit
+------
+
+Criar uma sub-interface 
+#interface Fa (entrada.1[fracionou a interface])
+#encapsulation dot1q (10) informar o destido do encapsulamento
+#ip address (ip-mask)
+~~portao de saida ~~
+#ip dhcp pool vlan()
+#default-router ip sub-interface
+#exit
+
+-----
+Excluir IPs da configuração DHCP
+#ip dhcp excluded-address (ip)
+
+---
+Para analisar a entrada e saida das redes
+#ip access-list extended (nome da lista)
+#permit tcp (ip-mascara [0.255]A.B.C.D)
+#permit tcp (ip-mascara [0.255]A.B.C.D) A outra rede que vai receber
+#denay tcp (ip-mascara: [0.255]A.B.C.D) - negar o acesso
+#permit ip any any (avaliar linha alinha e liber quem foi liberado
+exit
+~~ No router gerar acesso para as portas ~~~~
+#interface Fa(porta)
+#ip access-group nome da rede(gerencia) in - para liberar o acesso de entrada
+#exit
+
+----
+
+
+
